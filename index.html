@@ -249,7 +249,7 @@
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: #5c1829;
+            color: #131010;
             font-weight: 700;
         }
         .section-title1 {
@@ -290,22 +290,53 @@
             padding: 5rem 0;
             background: linear-gradient(135deg, #5c1829, #3d1018, #000000);
             color: white;
+            overflow: hidden;
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .section-title1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .carousel-container {
+            position: relative;
+            padding: 0 60px;
+        }
+
+        .services-carousel {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .services-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
             gap: 2rem;
-            margin-top: 3rem;
         }
 
         .service-card {
+            min-width: 350px;
             background: rgba(255, 255, 255, 0.1);
             padding: 2rem;
             border-radius: 20px;
             text-align: center;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
         }
 
         .service-image {
@@ -318,6 +349,11 @@
             align-items: center;
             justify-content: center;
             font-size: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-image {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .service-card h3 {
@@ -334,10 +370,117 @@
         .service-list li {
             padding: 0.5rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: padding-left 0.3s ease;
+        }
+
+        .service-list li:hover {
+            padding-left: 10px;
         }
 
         .service-list li:last-child {
             border-bottom: none;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .carousel-btn.prev {
+            left: 0;
+        }
+
+        .carousel-btn.next {
+            right: 0;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: white;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        .ver-mas-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 3rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .ver-mas-btn:hover {
+            background: white;
+            color: #5c1829;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .section-title1 {
+                font-size: 2rem;
+            }
+
+            .carousel-container {
+                padding: 0 50px;
+            }
+
+            .service-card {
+                min-width: 280px;
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .services {
+                padding: 3rem 0;
+            }
         }
 
         .ver-mas-btn, .ver-precios-btn {
@@ -691,8 +834,8 @@
 
     <section id="inicio" class="hero">
         <div class="hero-content">
-            <h1>BELLEZA Y ESTILO</h1>
-            <p>Donde la belleza se encuentra con la excelencia. Tu estilo, a otro nivel.</p>
+            <h1>GLOW UP</h1>
+            <p>El cambio que buscas</p>
             <div class="hero-buttons">
                 <a href="#servicios" class="btn-primary">Ver Servicios</a>
                 <a href="#contacto" class="btn-secondary">Contactanos</a>
@@ -746,46 +889,84 @@
     <section id="servicios" class="services">
         <div class="container">
             <h2 class="section-title1">Nuestros Servicios</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-image">✨</div>
-                    <h3>ESTÉTICA</h3>
-                    <ul class="service-list">
-                        <li>HIFU</li>
-                        <li>Lifting facial</li>
-                        <li>Limpieza facial</li>
-                        <li>Manos</li>
-                        <li>Pies</li>
-                        <li>Faciales</li>
-                        <li>Cejas</li>
-                        <li>Pestañas</li>
-                    </ul>
+            
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="moveCarousel(-1)">❮</button>
+                
+                <div class="services-carousel">
+                    <div class="services-track" id="servicesTrack">
+                        <div class="service-card">
+                            <div class="service-image">✨</div>
+                            <h3>ESTÉTICA</h3>
+                            <ul class="service-list">
+                                <li>HIFU</li>
+                                <li>Lifting facial</li>
+                                <li>Limpieza facial</li>
+                                <li>Manos</li>
+                                <li>Pies</li>
+                                <li>Faciales</li>
+                                <li>Cejas</li>
+                                <li>Pestañas</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-image">✂️</div>
+                            <h3>BARBERÍA</h3>
+                            <ul class="service-list">
+                                <li>Corte y Peinado</li>
+                                <li>Platinados</li>
+                                <li>Diseño de pelo</li>
+                                <li>Diseño de barba</li>
+                                <li>Detalles freestyle</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-image">💇‍♀️</div>
+                            <h3>PELUQUERÍA</h3>
+                            <ul class="service-list">
+                                <li>Balayage</li>
+                                <li>Claritos</li>
+                                <li>Coloración</li>
+                                <li>Progresivo Orgánico</li>
+                                <li>Platinados</li>
+                                <li>Extensiones de Cabello</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-image">👣</div>
+                            <h3>PODOLOGÍA</h3>
+                            <ul class="service-list">
+                                <li>Tratamiento de callos</li>
+                                <li>Tratamiento de uñas</li>
+                                <li>Cuidado de pie diabético</li>
+                                <li>Reflexología podal</li>
+                                <li>Onicomicosis</li>
+                                <li>Pedicura médica</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-card">
+                            <div class="service-image">🌟</div>
+                            <h3>DEPILACIÓN DESCARTABLE</h3>
+                            <ul class="service-list">
+                                <li>Depilación facial</li>
+                                <li>Cejas y labio superior</li>
+                                <li>Axilas</li>
+                                <li>Piernas completas</li>
+                                <li>Brazos</li>
+                                <li>Bikini</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-image">✂️</div>
-                    <h3>BARBERÍA</h3>
-                    <ul class="service-list">
-                        <li>Corte y Peinado</li>
-                        <li>Platinados</li>
-                        <li>Diseño de pelo</li>
-                        <li>Diseño de barba</li>
-                        <li>Detalles freestyle</li>
-                    </ul>
-                    <button class="ver-precios-btn" onclick="togglePrecios()">Ver Precios</button>
-                </div>
-                <div class="service-card">
-                    <div class="service-image">💇‍♀️</div>
-                    <h3>PELUQUERÍA</h3>
-                    <ul class="service-list">
-                        <li>Balayage</li>
-                        <li>Claritos</li>
-                        <li>Coloración</li>
-                        <li>Progresivo Orgánico</li>
-                        <li>Platinados</li>
-                        <li>Extensiones de Cabello</li>
-                    </ul>
-                </div>
+                
+                <button class="carousel-btn next" onclick="moveCarousel(1)">❯</button>
             </div>
+            
+            <div class="carousel-indicators" id="indicators"></div>
             
             <div style="text-align: center;">
                 <button class="ver-mas-btn" onclick="toggleGallery()">Ver Más</button>
@@ -819,9 +1000,105 @@
         </div>
     </section>
 
+    <script>
+        let currentIndex = 0;
+        const totalCards = 5;
+        let cardsToShow = getCardsToShow();
+
+        function getCardsToShow() {
+            if (window.innerWidth <= 480) return 1;
+            if (window.innerWidth <= 768) return 1;
+            if (window.innerWidth <= 1024) return 2;
+            return 3;
+        }
+
+        function updateCarousel() {
+            const track = document.getElementById('servicesTrack');
+            const cardWidth = track.querySelector('.service-card').offsetWidth;
+            const gap = 32;
+            const offset = -(currentIndex * (cardWidth + gap));
+            track.style.transform = `translateX(${offset}px)`;
+            updateIndicators();
+        }
+
+        function moveCarousel(direction) {
+            const maxIndex = totalCards - cardsToShow;
+            currentIndex += direction;
+            
+            if (currentIndex < 0) {
+                currentIndex = maxIndex;
+            } else if (currentIndex > maxIndex) {
+                currentIndex = 0;
+            }
+            
+            updateCarousel();
+        }
+
+        function createIndicators() {
+            const indicatorsContainer = document.getElementById('indicators');
+            indicatorsContainer.innerHTML = '';
+            const maxIndex = totalCards - cardsToShow;
+            
+            for (let i = 0; i <= maxIndex; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator';
+                indicator.onclick = () => {
+                    currentIndex = i;
+                    updateCarousel();
+                };
+                indicatorsContainer.appendChild(indicator);
+            }
+            updateIndicators();
+        }
+
+        function updateIndicators() {
+            const indicators = document.querySelectorAll('.indicator');
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        window.addEventListener('resize', () => {
+            const newCardsToShow = getCardsToShow();
+            if (newCardsToShow !== cardsToShow) {
+                cardsToShow = newCardsToShow;
+                currentIndex = 0;
+                createIndicators();
+                updateCarousel();
+            }
+        });
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const carousel = document.querySelector('.services-carousel');
+        carousel.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        carousel.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchStartX - touchEndX > 50) {
+                moveCarousel(1);
+            }
+            if (touchEndX - touchStartX > 50) {
+                moveCarousel(-1);
+            }
+        }
+
+        createIndicators();
+        updateCarousel();
+    </script>
+            
+    
+
     <section class="team">
         <div class="container">
-            <h2 class="section-title">Nuestro Equipo</h2>
+            <h2 class="section-title">Nuestro Centro Cuenta Con  <br> Excelentes Profesionales <br> </h2>
             <div class="team-card">
                 <div class="team-photo">
                     <img src="img/clienta.jpg" alt="Adriana Fernandez">
